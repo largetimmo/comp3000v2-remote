@@ -39,6 +39,7 @@ public class Controller {
         //String uri = "ws://"+address.getText().toString() + ":" + port.getText().toString()+"/ws/remote";
         String uri = "ws://127.0.0.1:8080/ws/remote";
         SocketHandler.getInstance().init(new URI(uri));
+        connectServer.setDisable(true);
 
     }
 

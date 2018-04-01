@@ -1,12 +1,10 @@
 package systemcontroller;
 
-import javax.print.attribute.standard.NumberUp;
-
 public class SystemController {
     static {
         //todo
         //change the null to your lib path
-        //MUST USE EXACT PATH
+        //MUST USE Absolute PATH
         //System.load(null);
     }
 

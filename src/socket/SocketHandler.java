@@ -1,16 +1,19 @@
 package socket;
 
 import com.alibaba.fastjson.JSONObject;
+import systemcontroller.SystemController;
+import view.Controller;
 
+import javax.json.JsonObject;
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
-
 public class SocketHandler {
 
     private Socket socket = null;
     private static final SocketHandler instance = new SocketHandler();
-    public static SocketHandler getInstance(){
+
+    public static SocketHandler getInstance() {
         return instance;
     }
 
@@ -24,16 +27,16 @@ public class SocketHandler {
     private final String Password_Tag = "PWD";
 
 
-
-    public void init(URI uri){
+    public void init(URI uri) {
         socket = new Socket(uri);
+        sendMessage("{\"ACTION\":\"LOGIN\"}");
     }
 
-    public void sendMessage(String message){
-        socket.session.getAsyncRemote().sendText(message);
+    public void sendMessage(String message) {
+        socket.sendMessage(message);
     }
 
-    protected void handleMessage(String message){
+    public void handleMessage(String message) {
         JSONObject jsonObject = JSONObject.parseObject(message);
         String action = jsonObject.getString(Action_Tag);
         switch (action) {
@@ -41,58 +44,25 @@ public class SocketHandler {
                 JSONObject logininfo = jsonObject.getJSONObject(Data_Tag);
                 String userid = logininfo.getString(User_ID_Tag);
                 String password = logininfo.getString(Password_Tag);
-                //todo set userid and pwd to screen
+                System.out.println(logininfo.toJSONString());
+                Controller.getInstance().setLoginInfo(userid,password);
                 break;
             case GET_PROCESS_ACTION:
-                
+                String result = SystemController.getallprocesses_test();
+                jsonObject.put("DATA", result);
+                sendMessage(jsonObject.toJSONString());
                 break;
             case KILL_PROCESS_ACTION:
+                int pid = jsonObject.getInteger("DATA");
+                int result_int = SystemController.killProcess(pid);
+                jsonObject.put("DATA", result_int);
+                sendMessage(jsonObject.toJSONString());
                 break;
             default:
                 break;
         }
 
     }
-
-    @ClientEndpoint
-    class Socket{
-
-        private Session session;
-
-        private Socket(URI serveraddr){
-            WebSocketContainer webSocketContainer = ContainerProvider.getWebSocketContainer();
-            try {
-                webSocketContainer.connectToServer(this,serveraddr);
-            } catch (DeploymentException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        @OnOpen
-        private void onOpen(Session session) {
-            this.session = session;
-        }
-
-        @OnMessage
-        private void onMessage(String message) {
-            handleMessage(message);
-        }
-
-        @OnClose
-        private void onClose() {
-
-        }
-
-        @OnError
-        private void onError(Throwable throwable) {
-
-        }
-    }
-
-
-
-
 
 
 }

@@ -1,6 +1,8 @@
 package socket;
 
 
+import systemcontroller.SystemController;
+
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
@@ -23,6 +25,8 @@ public class Socket{
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
+        session.setMaxTextMessageBufferSize(32768);
+        session.setMaxIdleTimeout(0);
     }
 
     @OnMessage
@@ -32,13 +36,14 @@ public class Socket{
     }
 
     @OnClose
-    private void onClose() {
-
+    private void onClose(CloseReason reason) {
+        System.out.println("Close:"+reason.getReasonPhrase());
+        System.out.println(reason.getCloseCode());
     }
 
     @OnError
-    public void onError(Session error_session,Throwable throwable) {
-        throwable.printStackTrace();
+    public void onError(Session error_session, Throwable throwable) {
+
     }
     public void sendMessage(String message){
         session.getAsyncRemote().sendText(message);

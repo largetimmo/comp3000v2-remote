@@ -1,15 +1,10 @@
 package systemcontroller;
 
 public class SystemController {
-    static {
-        //todo
-        //change the null to your lib path
-        //MUST USE Absolute PATH
-        //System.load(null);
+    public static void loadLib(String filepath){
+        System.load(filepath);
     }
-
     public static native int killProcess(int pid);
-    @Deprecated
     public static native String getallprocesses();
     public static native String getallpids();
     public static native String getProcInfo(int pid);

@@ -30,6 +30,7 @@ public class SocketHandler {
     public void init(URI uri) {
         socket = new Socket(uri);
         sendMessage("{\"ACTION\":\"LOGIN\"}");
+
     }
 
     public void sendMessage(String message) {
@@ -48,7 +49,7 @@ public class SocketHandler {
                 Controller.getInstance().setLoginInfo(userid,password);
                 break;
             case GET_PROCESS_ACTION:
-                String result = SystemController.getallprocesses_test();
+                String result = SystemController.getallprocesses();
                 jsonObject.put("DATA", result);
                 sendMessage(jsonObject.toJSONString());
                 break;

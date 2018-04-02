@@ -12,6 +12,8 @@
         <TextField fx:id="address" layoutX="131.0" layoutY="40.0" />
         <Label layoutX="64.0" layoutY="88.0" text="Port" />
         <TextField fx:id="port" layoutX="131.0" layoutY="83.0" />
+        <Label layoutX="50.0" layoutY="137.0" text="Lib path" />
+        <TextField fx:id="libpath" layoutX="131.0" layoutY="132.0" />
         <Button fx:id="connectServer" layoutX="387.0" layoutY="54.0" mnemonicParsing="false" onAction="#setServer" text="Connect Server" />
         <Text fx:id="uid" layoutX="192.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N/A" />
         <Label layoutX="131.0" layoutY="208.0" text="UID:" />

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Controller">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+            fx:controller="view.Controller">
     <children>
-        <Label layoutX="29.0" layoutY="45.0" text="Server Address" />
-        <TextField fx:id="address" layoutX="131.0" layoutY="40.0" />
-        <Label layoutX="64.0" layoutY="88.0" text="Port" />
-        <TextField fx:id="port" layoutX="131.0" layoutY="83.0" />
-        <Label layoutX="50.0" layoutY="137.0" text="Lib path" />
-        <TextField fx:id="libpath" layoutX="131.0" layoutY="132.0" />
-        <Button fx:id="connectServer" layoutX="387.0" layoutY="54.0" mnemonicParsing="false" onAction="#setServer" text="Connect Server" />
-        <Text fx:id="uid" layoutX="192.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N/A" />
-        <Label layoutX="131.0" layoutY="208.0" text="UID:" />
-        <Label layoutX="113.0" layoutY="264.0" text="Password:" />
-        <Text fx:id="password" layoutX="192.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N/A" />
+        <Label layoutX="29.0" layoutY="45.0" text="Server Address"/>
+        <TextField fx:id="address" layoutX="131.0" layoutY="40.0"/>
+        <Label layoutX="64.0" layoutY="88.0" text="Port"/>
+        <TextField fx:id="port" layoutX="131.0" layoutY="83.0"/>
+        <Label layoutX="50.0" layoutY="137.0" text="Lib path"/>
+        <TextField fx:id="libpath" layoutX="131.0" layoutY="132.0"/>
+        <Button fx:id="connectServer" layoutX="387.0" layoutY="54.0" mnemonicParsing="false" onAction="#setServer"
+                text="Connect Server"/>
+        <Text fx:id="uid" layoutX="192.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N/A"/>
+        <Label layoutX="131.0" layoutY="208.0" text="UID:"/>
+        <Label layoutX="113.0" layoutY="264.0" text="Password:"/>
+        <Text fx:id="password" layoutX="192.0" layoutY="277.0" strokeType="OUTSIDE" strokeWidth="0.0" text="N/A"/>
     </children>
 </AnchorPane>

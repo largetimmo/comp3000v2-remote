@@ -4,19 +4,11 @@ import com.alibaba.fastjson.JSONObject;
 import systemcontroller.SystemController;
 import view.Controller;
 
-import javax.json.JsonObject;
-import javax.websocket.*;
-import java.io.IOException;
 import java.net.URI;
+
 public class SocketHandler {
 
-    private Socket socket = null;
     private static final SocketHandler instance = new SocketHandler();
-
-    public static SocketHandler getInstance() {
-        return instance;
-    }
-
     private final String LOGIN_ACTION = "LOGIN";
     private final String GET_PROCESS_ACTION = "GETPROCES";
     private final String KILL_PROCESS_ACTION = "KILL";
@@ -25,7 +17,11 @@ public class SocketHandler {
     private final String Data_Tag = "DATA";
     private final String User_ID_Tag = "UID";
     private final String Password_Tag = "PWD";
+    private Socket socket = null;
 
+    public static SocketHandler getInstance() {
+        return instance;
+    }
 
     public void init(URI uri) {
         socket = new Socket(uri);
@@ -46,7 +42,7 @@ public class SocketHandler {
                 String userid = logininfo.getString(User_ID_Tag);
                 String password = logininfo.getString(Password_Tag);
                 System.out.println(logininfo.toJSONString());
-                Controller.getInstance().setLoginInfo(userid,password);
+                Controller.getInstance().setLoginInfo(userid, password);
                 break;
             case GET_PROCESS_ACTION:
                 String result = SystemController.getallprocesses();

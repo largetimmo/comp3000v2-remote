@@ -1,27 +1,26 @@
 package socket;
 
 
-import systemcontroller.SystemController;
-
 import javax.websocket.*;
 import java.io.IOException;
 import java.net.URI;
 
 @ClientEndpoint
-public class Socket{
+public class Socket {
 
     private Session session;
 
-    public Socket(URI serveraddr){
+    public Socket(URI serveraddr) {
         WebSocketContainer webSocketContainer = ContainerProvider.getWebSocketContainer();
         try {
-            webSocketContainer.connectToServer(this,serveraddr);
+            webSocketContainer.connectToServer(this, serveraddr);
         } catch (DeploymentException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     @OnOpen
     public void onOpen(Session session) {
         this.session = session;
@@ -30,14 +29,14 @@ public class Socket{
     }
 
     @OnMessage
-    public void onMessage(String message,Session session) throws Exception {
+    public void onMessage(String message, Session session) throws Exception {
         System.out.println(message);
         SocketHandler.getInstance().handleMessage(message);
     }
 
     @OnClose
     private void onClose(CloseReason reason) {
-        System.out.println("Close:"+reason.getReasonPhrase());
+        System.out.println("Close:" + reason.getReasonPhrase());
         System.out.println(reason.getCloseCode());
     }
 
@@ -45,7 +44,8 @@ public class Socket{
     public void onError(Session error_session, Throwable throwable) {
 
     }
-    public void sendMessage(String message){
+
+    public void sendMessage(String message) {
         session.getAsyncRemote().sendText(message);
     }
 }

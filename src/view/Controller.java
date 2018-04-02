@@ -13,11 +13,6 @@ import java.net.URISyntaxException;
 
 public class Controller {
     private static Controller instance = null;
-    public static Controller getInstance(){
-        return instance;
-    }
-
-
     @FXML
     private Button connectServer;
     @FXML
@@ -31,28 +26,30 @@ public class Controller {
     @FXML
     private TextField libpath;
 
+    public static Controller getInstance() {
+        return instance;
+    }
+
     @FXML
-    private void initialize(){
+    private void initialize() {
         instance = this;
     }
 
     @FXML
     private void setServer() throws URISyntaxException {
-        String uri = "ws://"+address.getText() + ":" + port.getText()+"/ws/remote";
+        String uri = "ws://" + address.getText() + ":" + port.getText() + "/ws/remote";
         //String uri = "ws://127.0.0.1:8080/ws/remote";
-        if(libpath.getText().length() != 0){
+        if (libpath.getText().length() != 0) {
             SocketHandler.getInstance().init(new URI(uri));
             connectServer.setDisable(true);
             SystemController.loadLib(libpath.getText());
-            System.out.println(SystemController.getallprocesses());
         }
     }
 
-    public void setLoginInfo(String uid, String password){
+    public void setLoginInfo(String uid, String password) {
         this.uid.setText(uid);
         this.password.setText(password);
     }
-
 
 
 }

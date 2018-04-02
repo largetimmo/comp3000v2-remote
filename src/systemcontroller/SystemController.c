@@ -15,7 +15,7 @@
 #include <grp.h>
 #include <pwd.h>
 
-#include "SmarterMonitor_controller_SystemController.h"
+#include "systemcontroller_SystemController.h"
 
 #define MAX_STRING_SIZE 20
 
@@ -317,7 +317,7 @@ int main(int argc, const char * argv[]) {
 */
 
 
-JNIEXPORT jstring JNICALL Java_SmarterMonitor_controller_SystemController_getallprocesses (JNIEnv *env, jclass cls){
+JNIEXPORT jstring JNICALL Java_systemcontroller_SystemController_getallprocesses (JNIEnv *env, jclass cls){
     char* message = malloc(51200);
        readAll(1,0,message);
        jstring opt =  (*env)->NewStringUTF(env,message);
@@ -325,13 +325,13 @@ JNIEXPORT jstring JNICALL Java_SmarterMonitor_controller_SystemController_getall
 
 }
 
-JNIEXPORT jstring JNICALL Java_SmarterMonitor_controller_SystemController_getProcInfo (JNIEnv *env, jclass cls, jint pid){
+JNIEXPORT jstring JNICALL Java_systemcontroller_SystemController_getProcInfo (JNIEnv *env, jclass cls, jint pid){
      char* msg = malloc(256);
      getProcessInfo((int)pid,msg,1,0);
     return (*env)->NewStringUTF(env,msg);
 }
 
-JNIEXPORT jstring JNICALL Java_SmarterMonitor_controller_SystemController_getallpids (JNIEnv *env, jclass cls){
+JNIEXPORT jstring JNICALL Java_systemcontroller_SystemController_getallpids (JNIEnv *env, jclass cls){
         char* message = malloc(2048);
         char** farr = malloc(sizeof(char*)*500);
         int farr_size = 0;
@@ -340,7 +340,7 @@ JNIEXPORT jstring JNICALL Java_SmarterMonitor_controller_SystemController_getall
         return(*env)->NewStringUTF(env,message);
 }
 
-JNIEXPORT jint JNICALL Java_SmarterMonitor_controller_SystemController_killProcess (JNIEnv* env, jclass cls, jint pid){
+JNIEXPORT jint JNICALL Java_systemcontroller_SystemController_killProcess (JNIEnv* env, jclass cls, jint pid){
     return killprocess((int) pid);
 
 }

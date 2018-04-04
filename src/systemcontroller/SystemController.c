@@ -155,7 +155,7 @@ void readCpuTime(char* filepath,proc* procsrctp){
     unsigned long utime = -1;
     unsigned long ktime = -1;
     for (int i = 0;i<strlen(linep);linep++) {
-        if(spacecount == 14){
+        if(spacecount == 12){
             //utime
             sscanf(linep, "%lu %lu", &utime, &ktime);
             break;

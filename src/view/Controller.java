@@ -7,8 +7,10 @@ import javafx.scene.text.Text;
 import socket.SocketHandler;
 import systemcontroller.SystemController;
 
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 
 
 public class Controller {
@@ -23,8 +25,6 @@ public class Controller {
     private Text uid;
     @FXML
     private Text password;
-    @FXML
-    private TextField libpath;
 
     public static Controller getInstance() {
         return instance;
@@ -36,13 +36,23 @@ public class Controller {
     }
 
     @FXML
-    private void setServer() throws URISyntaxException {
+    private void setServer() throws URISyntaxException, IOException {
         String uri = "ws://" + address.getText() + ":" + port.getText() + "/ws/remote";
         //String uri = "ws://127.0.0.1:8080/ws/remote";
-        if (libpath.getText().length() != 0) {
+        if (address.getText().length() != 0) {
             SocketHandler.getInstance().init(new URI(uri));
             connectServer.setDisable(true);
-            SystemController.loadLib(libpath.getText());
+            InputStream is  = getClass().getResourceAsStream("/systemcontroller/libsystemcontroller.so");
+            File file = File.createTempFile("syscontrollerlib","so");
+            OutputStream os = new FileOutputStream(file);
+            int result = 0;
+            byte[] buffer = new byte[1024];
+            while ((result = is.read(buffer)) != -1){
+                os.write(buffer,0,result);
+            }
+            is.close();
+            os.close();
+            SystemController.loadLib(file.getAbsolutePath());
         }
     }
 

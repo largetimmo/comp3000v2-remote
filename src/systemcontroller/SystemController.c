@@ -317,9 +317,9 @@ int main(int argc, const char * argv[]) {
 */
 
 
-JNIEXPORT jstring JNICALL Java_systemcontroller_SystemController_getallprocesses (JNIEnv *env, jclass cls){
+JNIEXPORT jstring JNICALL Java_systemcontroller_SystemController_getallprocesses (JNIEnv *env, jclass cls,jint sec, jint usec){
     char* message = malloc(51200);
-       readAll(1,0,message);
+       readAll((int)sec,(int)usec,message);
        jstring opt =  (*env)->NewStringUTF(env,message);
    return opt;
 

@@ -3,7 +3,7 @@
 //  comp3000project
 //
 //  Created by CHEN JUNHAO on 2018/3/5.
-//  Copyright © 2018年 CHEN JUNHAO. All rights reserved.
+//  Copyright © 2018 CHEN JUNHAO. All rights reserved.
 //
 #include <jni.h>
 #include <stdio.h>
